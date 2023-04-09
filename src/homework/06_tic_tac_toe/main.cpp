@@ -1,17 +1,19 @@
 #include "tic_tac_toe.h"
-
+#include "tic_tac_toe_manager.h"
 
 
 int main() 
 {
  TicTacToe game;
-
+ TicTacToeManager score;
+ int o;
+ int x;
+ int t;
  char value;
 
  do
  {
 	string first_player;
-	int position;
 
 	while(first_player != "X" && first_player != "O")
 	{
@@ -32,25 +34,20 @@ int main()
 
 	while(game.game_over() == false)
 	{
-		while(true)
-		{
-			cout<<"Choose a space from 1 - 9: ";
-			cin>>position;
-			if(position >=1 && position <= 9)
-			{
-				break;
-			}
-			else
-			{
-				cout<<"Please enter a value between 1 and 9\n";
-			}
-		}
-		game.mark_board(position);
-		game.display_board();
+	cin>>game;
+	cout<<game;
 	}
+
 	cout<<"Game Over\n"<<"Player "<<game.get_winner()<<" Wins!\n\n";
 	
-	
+	score.save_game(game);
+	score.get_winner_total(o,x,t);
+
+	cout<<"O wins: "<<o<<"\n";
+	cout<<"X wins: "<<x<<"\n";
+	cout<<"Ties: "<<t<<"\n";
+
+
 	while(true)
 	{
 		cout<<"Would you like to play again? (Y/N): \n";
@@ -68,6 +65,16 @@ int main()
 	}
 
  } while (value != 'n' && value != 'N');
- 
-	return 0;
+
+ cout<<"\n\n";
+ cout<<score;
+ cout<<"\n\n";
+ score.get_winner_total(o,x,t);
+ cout<<"O wins: "<<o<<"\n";
+ cout<<"X wins: "<<x<<"\n";
+ cout<<"Ties: "<<t<<"\n\n";
+ cout<<"Thanks for playing!\n";
+
+
+ return 0; 
 }

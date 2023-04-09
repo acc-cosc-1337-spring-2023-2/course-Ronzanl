@@ -41,20 +41,24 @@ void TicTacToe::mark_board(int postion)
     set_next_player();
 }
 
-string TicTacToe::get_player() const {return player;}
+string TicTacToe::get_player() const 
+{
+    return player;
+}
 
-void TicTacToe::display_board() const
+ostream& operator<<(ostream& out, const TicTacToe& game)
 {
     for (int num = 0; num < 3; num++)
     {
         for (int num1 = 0; num1 < 3; num1++)
         {
-            cout<<pegs[ (num*3) + num1 ];
+            out<<game.pegs[ (num*3) + num1 ];
             if( num1 < 2 ){ cout<<"|"; }
         }
         if(num < 2){cout<<"\n";}
     }
-    cout<<"\n";
+    out<<"\n";
+    return out;
 }
 
 void TicTacToe::set_next_player()
@@ -163,4 +167,24 @@ void TicTacToe::set_winner()
     {
         winner = "X";
     }
+}
+
+istream& operator>>(istream& in, TicTacToe& game)
+{
+    int position;
+    while(true)
+		{
+			cout<<"Choose a space from 1 - 9: ";
+			in>>position;
+			if(position >=1 && position <= 9)
+			{
+				break;
+			}
+			else
+			{
+				cout<<"Please enter a value between 1 and 9\n";
+			}
+		}
+		game.mark_board(position);
+        return in;
 }
