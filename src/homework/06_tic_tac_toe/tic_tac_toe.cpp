@@ -1,6 +1,8 @@
 #include "tic_tac_toe.h"
 
 
+TicTacToe::TicTacToe(int size) : pegs(size*size , " "){}
+
 bool TicTacToe::game_over()
 {
     if (check_column_win() == true)
@@ -48,14 +50,21 @@ string TicTacToe::get_player() const
 
 ostream& operator<<(ostream& out, const TicTacToe& game)
 {
-    for (int num = 0; num < 3; num++)
+    int row_size = sqrt(game.pegs.size());
+    int size = static_cast<int>(game.pegs.size());
+
+    for (int num = 0; num < size; num++)
     {
-        for (int num1 = 0; num1 < 3; num1++)
-        {
-            out<<game.pegs[ (num*3) + num1 ];
-            if( num1 < 2 ){ cout<<"|"; }
+        out<<game.pegs[num];
+        if( (num + 1) % row_size == 0 )
+        { 
+            out<<"\n"; 
         }
-        if(num < 2){cout<<"\n";}
+        else
+        {
+            out<<"|";
+        }
+        
     }
     out<<"\n";
     return out;
@@ -76,7 +85,8 @@ void TicTacToe::set_next_player()
 
 bool TicTacToe::check_board_full()
 {
-    for (int num = 0; num < 9; num++)
+    
+    for (int num = 0; num < pegs.size(); num++)
     {
         if (pegs[num] == " ")
         {
@@ -102,39 +112,17 @@ string TicTacToe::get_winner()
 
 bool TicTacToe::check_column_win()
 {
-    for (int num = 0; num < 3; num++)
-    {
-        if(pegs[num] == "X" && pegs[num+3] == "X" && pegs[num+6] == "X")
-        {
-            return true;
-        }
-        else if(pegs[num] == "O" && pegs[num+3] == "O" && pegs[num+6] == "O")
-        {
-            return true;
-        }
-    }
     return false;
 }
 
 bool TicTacToe::check_row_win()
 {   
-    for (int num = 0; num < 9; num+=3)
-    {
-        if(pegs[num] == "X" && pegs[num+1] == "X" && pegs[num+2] == "X")
-        {
-            return true;
-        }
-        else if(pegs[num] == "O" && pegs[num+1] == "O" && pegs[num+2] == "O")
-        {
-            return true;
-        }
-    }
     return false;
 }
 
 bool TicTacToe::check_diagonal_win()
 {   
-    
+    /*
     if (pegs[0] == "X" && pegs[4] == "X" && pegs[8] == "X")
     {
         return true;
@@ -154,7 +142,9 @@ bool TicTacToe::check_diagonal_win()
     else
     {
         return false;
-    }
+    }*/
+
+    return false;
 }
 
 void TicTacToe::set_winner()
@@ -172,17 +162,19 @@ void TicTacToe::set_winner()
 istream& operator>>(istream& in, TicTacToe& game)
 {
     int position;
+    int max_size = game.pegs.size();
+
     while(true)
 		{
-			cout<<"Choose a space from 1 - 9: ";
+			cout<<"Choose a space from 1 - "<<max_size<<": ";
 			in>>position;
-			if(position >=1 && position <= 9)
+			if(position >=1 && position <= max_size)
 			{
 				break;
 			}
 			else
 			{
-				cout<<"Please enter a value between 1 and 9\n";
+				cout<<"Please enter a value between 1 and "<<max_size<<"\n";
 			}
 		}
 		game.mark_board(position);

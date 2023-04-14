@@ -1,6 +1,8 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <cmath>
+/*#include <memory>*/
 
 using std::cout; using std::cin; using std::string; using std::vector;
 using std::ostream; using std::istream;
@@ -22,17 +24,21 @@ void mark_board(int position);
 string get_player()const;
 string get_winner();
 
+TicTacToe(int size);
+
 private:
 string player;
-vector<string> pegs{9, " "};
 void set_next_player();
 bool check_board_full();
 void clear_board();
-bool check_column_win();
-bool check_row_win();
-bool check_diagonal_win();
 void set_winner();
 string winner;
+
+protected:
+vector<string> pegs;
+virtual bool check_column_win();
+virtual bool check_row_win();
+virtual bool check_diagonal_win();
 
 };
 
