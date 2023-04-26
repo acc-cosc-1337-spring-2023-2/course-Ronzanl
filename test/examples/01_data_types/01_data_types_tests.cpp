@@ -1,5 +1,6 @@
 #define CATCH_CONFIG_MAIN  // This tells Catch to provide a main() - only do this in one cpp file
 #include "catch.hpp"
+#include "char.h"
 
 TEST_CASE("Verify Test Configuration", "verification") {
 	REQUIRE(true == true);
@@ -18,4 +19,3 @@ TEST_CASE("Verify Test Configuration", "verification") {
 /*test case char test ASCII values */
 
 /*test case string test ASCII values Joe characters are equal to 74, 111, and 101*/
-
