@@ -9,7 +9,7 @@ using std::string;
 //returns 'Option 3' when value 3
 //returns 'Option 4' when value 4
 //return 'Invalid Option' otherwise
-
+/*
 string menu(int num)
 {
 string option;
@@ -22,3 +22,4 @@ switch(num)
 
 return option;
 }
+*/
