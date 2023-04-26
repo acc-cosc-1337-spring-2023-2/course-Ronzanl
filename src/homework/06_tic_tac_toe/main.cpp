@@ -8,8 +8,10 @@ using std::make_unique;
 
 int main() 
 {
+ TicTacToeData data;
+ TicTacToeManager score(data);
  unique_ptr<TicTacToe> game;
- TicTacToeManager score;
+ 
  int o;
  int x;
  int t;
@@ -21,7 +23,7 @@ int main()
 
 	while(true)
 	{
-		cout<<"Enter A Choice\n";
+		cout<<"Enter a Choice\n";
 		cout<<"3: Normal Tic-Tac-Toe\n";
 		cout<<"4: Crazy Tic-Tac-Toe (4x4 grid)\n";
 		cin>>size;

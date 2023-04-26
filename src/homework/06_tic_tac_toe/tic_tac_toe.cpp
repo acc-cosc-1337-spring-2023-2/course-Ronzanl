@@ -3,6 +3,8 @@
 
 TicTacToe::TicTacToe(int size) : pegs(size*size , " "){}
 
+TicTacToe::TicTacToe(vector<string> p, string win)  : pegs(p), winner(win){}
+
 bool TicTacToe::game_over()
 {
     if (check_column_win() == true)
@@ -179,4 +181,9 @@ istream& operator>>(istream& in, TicTacToe& game)
 		}
 		game.mark_board(position);
         return in;
+}
+
+vector<string> TicTacToe::get_pegs() const
+{
+    return pegs;
 }
